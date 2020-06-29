@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700,900");
+body {
+    font-family: 'Lato', Arial, sans-serif;
+    color: #6b6b6b;
+    font-size: 17px;
+    line-height: 1.6;
+}  
+
+.navBackground {
+    position: relative;
+    height: 60vh;
+    z-index: -2;
+    background: url("https://shrm-res.cloudinary.com/image/upload/c_crop,h_1798,w_4191,x_9,y_237/w_auto:100,w_2100,h_900,q_auto,f_auto/v1/Magazine/final_parsi_digital_kxdeg1") center top/cover no-repeat;
+}
+
+.classButton {
+    background-color: #375c36;
+}
+
+.overlay {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.navbar {
+    border: none;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+.navbar-brand {
+    font-size: 2.25rem;
+    font-weight: 900;
+    color: white;
+}
+.navbar--start--size {
+    padding: 4rem 0;
+}
+.navbar--final--size {
+    padding: 1rem 0;
+}
+.navbar--final--color {
+    background: #375c36;
+}
+.navbar--start--color {
+    opacity: 0.9;
+    background: rgba(0,0,0,0.2);
+}
+
+.navbar--start--color .navbar-brand,
+.navbar--start--color .navbar-text,
+.navbar--start--color a {
+    color: #fff;
+}
+
+footer {
+    background: #375c36;
+}
+
+.footertext {
+    color: rgba(255, 255, 255, 0.849);
+}

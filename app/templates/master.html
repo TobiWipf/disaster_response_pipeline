@@ -3,74 +3,156 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Disasters</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link href="css/styles.css" type="text/css" rel="stylesheet">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Disaster Response Project</a>
+    <nav class="navbar fixed-top navbar--start--color navbar--start--size"
+        data-startColor="navbar--start--color" data-startSize="navbar--start--size"
+        data-intoColor="navbar--final--color" data-intoSize="navbar--final--color">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Disaster Response Classification</a>
+            </div>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="https://www.udacity.com/">Made with Udacity</a></li>
-                <li><a href="https://github.com/">Contact</a></li>
-            </ul>
-        </div>
+    </nav>
+
+    <div class="navBackground">
+        <div class="overlay"></div>
     </div>
-</nav>
 
 
 <div class="jumbotron">
     <div class="container">
-        <h1 class="text-center">Disaster Response Project</h1>
-        <p class="text-center">Analyzing message data for disaster response</p>
-        <hr />
-      
         <div class="row">
-            <div class="col-lg-12 form-group-lg">
+            <div class="col-lg-8 form-group-lg">
                 <form action="/go" method="get">
-                    <input type="text" class="form-control form-control-lg" name="query" placeholder="Enter a message to classify">
-                    <div class="col-lg-offset-5">
-                        <button type="submit" class="btn btn-lg btn-success">Classify Message</button>
+                    <input type="text" class="form-control form-control-lg" name="query" placeholder="Enter a message to classify">         
+                    <div class="col-lg-4">
+                        <button type="submit" class="btn btn-lg btn-success classButton">Classify Message</button>
                     </div>
                 </form>
             </div>
-        </div>
-
-        {% block message %}
-        {% endblock %}
+            
+        </div>     
     </div>
 </div>
 
 <div class="container">
-    {% block content %}
+        <div class="row">
+            <p>
+                
+            </p>
+
+        </div>
+        {% block message %}
+        {% endblock %}
+        {% block content %}
         <div class="page-header">
             <h1 class="text-center">Overview of Training Dataset</h1>
         </div>
-    {% endblock %}
+        {% endblock %}
 
-    {% for id in ids %}
-        <div id="{{id}}"></div>
-    {% endfor %}
+        {% for id in ids %}
+        <div class="row justify-content-center">
+            <div class="col-12" id="{{id}}"></div>
+        </div>
+        {% endfor %}
+    
 </div>
 
+
+
+
+
+<footer class="page-footer py-3">
+    <div class="container-fluid text-center text-md-left">
+        <div class="row">
+            <div class="col-md-9 mt-md-0 mt-3">
+                <p style="color: rgba(255, 255, 255, 0.849)">This project was completed as part of the Data Science Nanodegree at Udacity.</p>
+            </div>
+            <hr class="clearfix w-200 d-md-none pb-3">
+            <div class="col-md-3 mb-md-0 mb-3">
+                <h5 class="text-uppercase" style="color: rgba(255, 255, 255, 0.849)">Links</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a style="color: rgba(255, 255, 255, 0.849)" href="https://github.com/TobiWipf/disaster_response_pipeline">Project GitHub</a>
+                    </li>
+                    <li>
+                        <a style="color: rgba(255, 255, 255, 0.849)" href="https://www.linkedin.com/in/tobias-wipf-717620176/">LinkedIn</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+  </div>
+</footer>
 <script type="text/javascript">
-    const graphs = {{graphJSON | safe}};
+    $(document).ready(() => {
+        const graphs = {{graphJSON | safe}};
     const ids = {{ids | safe}};
     for(let i in graphs) {
         Plotly.plot(ids[i], graphs[i].data, graphs[i].layout);
     }
+    })
+
 </script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        const navBar = $('.navbar'),
+        data = navBar.data();
+
+        let scrolling = false,
+        scrolledPast = false;
+
+        // transition Into
+        function switchInto() {
+            scrolledPast = true;
+            navBar.removeClass(data.startcolor);
+            navBar.removeClass(data.startsize);
+            navBar.addClass(data.intocolor);
+            navBar.addClass(data.intosize);
+        };
+
+        // transition Start
+        function switchStart() {
+            scrolledPast = false;
+            navBar.addClass(data.startcolor);
+            navBar.addClass(data.startsize);
+            navBar.removeClass(data.intocolor);
+            navBar.removeClass(data.intosize);
+        }
+
+        $(window).scroll(() => scrolling = true);
+
+        setInterval(() => {
+        if (scrolling) {
+            scrolling = false;
+            if ($(window).scrollTop() > 100) {
+            if (!scrolledPast) {
+                switchInto();
+            }
+            } else {
+            if (scrolledPast) {
+                switchStart();
+            }
+            }
+        }
+        }, 100);
+    })
+</script>
 </body>
 </html>
