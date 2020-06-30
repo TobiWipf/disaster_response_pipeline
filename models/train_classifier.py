@@ -79,7 +79,7 @@ def evaluate_models(model, X_test, y_test, category_names):
 
 
 def save_model(model, model_filepath):
-    pickle.dump(model, open(f'{model_filepath}/model', 'wb'))
+    pickle.dump(model, open(f'{model_filepath}', 'wb'))
 
 
 def main():
