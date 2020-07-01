@@ -22,8 +22,8 @@ nltk.download('wordnet')
 
 
 def load_data(database_filepath):
-    engine = create_engine(f'sqlite:///../data/{database_filepath}.db')
-    df = pd.read_sql(f'{database_filepath}', con=engine)
+    engine = create_engine(f'sqlite:///{database_filepath}')
+    df = pd.read_sql(f'{database_filepath.replace("../data/", "").replace(".db", "")}', con=engine)
     X = df['message']
     # drop id because it is not relevant and child_alone, because it only contains zeroes
 
